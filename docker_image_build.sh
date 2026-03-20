@@ -67,4 +67,13 @@ build_image() {
   )
 }
 
+if [[ "$APP" == "ALL" ]]; then
+    while IFS= read -r line; do
+	    build_app "$line"
+		echo "Build image $line"
+		sleep 3
+    done < <(tail -n +2 "$APPFILE_LIST")
+else
+    build_app "$APP"
+fi
 
